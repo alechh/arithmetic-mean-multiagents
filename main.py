@@ -28,7 +28,6 @@ class MyBehaviour(CyclicBehaviour):
         await asyncio.sleep(5)
 
     async def run(self):
-
         for neighbour in self.my_neighbours:
             msg_s = Message(to=neighbour)
             msg_s.body = str(self.all_my_info)
@@ -39,18 +38,17 @@ class MyBehaviour(CyclicBehaviour):
             global NUMBER_OF_RECEIVED_NUMBERS
             if NUMBER_OF_RECEIVED_NUMBERS != len(self.all_my_info):
                 NUMBER_OF_RECEIVED_NUMBERS += 1
-                print('1st069823 знает чисел: ' + str(len(self.all_my_info)))
-            # print("Result{}".format(self.all_my_info))
+                print(str(len(self.all_my_info)) + '/' + str(NUMBER_OF_AGENTS))
 
             if len(self.all_my_info) == NUMBER_OF_AGENTS:
-                print(sum(self.all_my_info.values()) / NUMBER_OF_AGENTS)
+                print('Result:\t' + str(sum(self.all_my_info.values()) / NUMBER_OF_AGENTS))
+                for value in self.all_my_info.values():
+                    print('\t' + str(value))
                 print("Finished!")
                 exit(0)
 
-        msg = await self.receive(timeout=1)  # 5
-        # print("MSG{}".format(msg))
+        msg = await self.receive(timeout=2)  # 5
         if msg:
-            # print ("Get mes {}, from {}".format(msg.body, msg.sender))
             self.all_my_info.update(ast.literal_eval(msg.body))
 
         await asyncio.sleep(1)  # 3
