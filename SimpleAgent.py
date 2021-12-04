@@ -4,13 +4,13 @@ from main import MyBehaviour
 
 class SimpleAgent(Agent):
     my_agent_name = ""
-    neighbours = []
+    neighbors = []
 
     async def setup(self):
-        b = MyBehaviour(self.my_agent_name, self.neighbours)
+        b = MyBehaviour(self.my_agent_name, self.neighbors)
         self.add_behaviour(b)
 
-    def __init__(self, name, password, neighbours):
+    def __init__(self, name, password, neighbors):
         super(SimpleAgent, self).__init__(name, password)
         self.my_agent_name = name
-        self.neighbours = neighbours
+        self.neighbors = neighbors
